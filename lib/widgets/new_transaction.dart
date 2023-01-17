@@ -1,19 +1,49 @@
 import 'package:flutter/material.dart';
+
 import 'package:intl/intl.dart';
+
+import '../widgets/adaptiveButton.dart';
 
 class NewTransactions extends StatefulWidget {
   final Function addTx;
 
-  NewTransactions(this.addTx);
+  NewTransactions(this.addTx) {
+    print('Constructor NewTransaction Widget');
+  }
 
   @override
-  State<NewTransactions> createState() => _NewTransactionsState();
+  _NewTransactionsState createState() {
+    print('createState NewTransaction Widget');
+    return _NewTransactionsState();
+  }
 }
 
 class _NewTransactionsState extends State<NewTransactions> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime _selectedDate;
+
+  _NewTransactionsState() {
+    print('Construction NewTransaction State');
+  }
+
+  @override
+  void initState() {
+    print('initState()');
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(NewTransactions oldWidget) {
+    print('didUpdateWidget()');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    print('dispose()');
+    super.dispose();
+  }
 
   void _submitData() {
     if (_amountController.text.isEmpty) {
@@ -64,7 +94,7 @@ class _NewTransactionsState extends State<NewTransactions> {
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
+            children: <Widget>[
               TextField(
                 decoration: InputDecoration(labelText: 'Title'),
                 controller: _titleController,
@@ -87,13 +117,7 @@ class _NewTransactionsState extends State<NewTransactions> {
                             : 'Picked Date: ${DateFormat.yMMMd().format(_selectedDate)}',
                       ),
                     ),
-                    TextButton(
-                      child: Text(
-                        'Choose Date',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      onPressed: _presentDatePicker,
-                    )
+                    AdaptiveFlatButton('Choose Date', _presentDatePicker)
                   ],
                 ),
               ),
